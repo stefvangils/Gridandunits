@@ -2,37 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileGrid : MonoBehaviour {
+public class TileGrid : MonoBehaviour
+{
 
-    public int xSize;
-    public int ySize;
+    public int xsize;
+    public int ysize;
     public float offset;
     public GridTile tile;
-    public Vector3[] gridSize;
+
 
 
     // Use this for initialization
-    void Start () {
-        //for (int i = 0; i < 10; i++)
-        //{
-        //    Instantiate(tile, new Vector3(i * 2.0F, 0, 0), Quaternion.identity);
+    void Start()
+    {
+
+        //    gridSize = new Vector3[(xSize + 1) * (ySize + 1)];
+        //    for (int i = 0, z = 0; z <= ySize; z++)
+        //    {
+        //        for (int x = 0; x <= xSize; x++, i++)
+        //        {
+        //            gridSize[i] = new Vector3(x, 0, z);
+        //        }
+        //    }
+        //    for (int i = 0; i < gridSize.Length; i++)
+        //    {
+        //        Instantiate(tile, gridSize[i], Quaternion.identity);
+        //    }
         //}
-        gridSize = new Vector3[(xSize + 1) * (ySize + 1)];
-        for (int i = 0, z = 0; z <= ySize; z++)
+
+        float Xoffset = 0;
+        
+        for (int i = 0; i < xsize; i++)
         {
-            for (int x = 0; x <= xSize; x++, i++)
+            float Yoffset = 0;
+            //zelfde loop maar dan voor y met daarin instantiate            
+            for (int y = 0; y < ysize; y++)
             {
-                gridSize[i] = new Vector3(x, 0, z);
+                Instantiate(tile, new Vector3(Xoffset, 0, Yoffset), Quaternion.identity);
+                Yoffset += offset;
             }
-        }
-        for (int i = 0; i < gridSize.Length; i++)
-        {
-            Instantiate(tile, gridSize[i], Quaternion.identity);
+            
+            Xoffset += offset;
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
